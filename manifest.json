@@ -1,0 +1,11 @@
+{
+	"id": "obsidian-pim-integration",
+	"name": "PIM Integration",
+	"version": "0.1.0",
+	"minAppVersion": "0.1.0",
+	"description": "Integration for MS office or groupware (e.g. CardDav).",
+	"author": "Obsidian",
+	"authorUrl": "https://obsidian.md",
+	"fundingUrl": "https://obsidian.md/pricing",
+	"isDesktopOnly": true
+}
