@@ -48,8 +48,19 @@ export class TypedVCardImpl implements TypedVCard {
 		}
 	}
 
+	/**
+	 * Normalizes line endings to CRLF as required by the vCard specifications:
+	 * RFC 6350 §3.2 (v4.0), RFC 2426/2425 §5.8.1 (v3.0), and the versit
+	 * vCard 2.1 spec. Many real-world producers (e.g. Outlook for v2.1)
+	 * emit bare LF or bare CR. This method ensures CRLF before parsing.
+	 */
+	protected static normalizeLineEndings(vCardString: string): string {
+		return vCardString.replace(/\r\n/g, "\n").replace(/\r/g, "\n").replace(/\n/g, "\r\n");
+	}
+
 	protected parseString(vCardString: string): Result<number, [number, [string, vCard][]]> {
-		const parsedVCard: vCard[] = vCard.parse(vCardString);
+		const normalized = TypedVCardImpl.normalizeLineEndings(vCardString);
+		const parsedVCard: vCard[] = vCard.parse(normalized);
 		return this.parseVCards(parsedVCard);
 	}
 
